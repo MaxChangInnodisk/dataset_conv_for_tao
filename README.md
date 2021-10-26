@@ -6,6 +6,24 @@ convert dataset's format for NVIDIA TAO Toolkit.
 
 # yolo to kitti
 
+## Structure of original dataset
+
+images and labels file place in same folder.
+
+```
+.
+├── data
+│   ├── 10.jpg
+│   ├── 10.txt
+│   ├── 11.jpg
+│   ├── 11.txt
+│   ├── 12.jpg
+│   ├── 12.txt
+│   ├── .
+│   ├── .
+│   ├── .
+```
+
 ## How to use
 
 1. clone repo between dataset which you want to format:
