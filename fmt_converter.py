@@ -5,15 +5,18 @@
 # Import Lib
 import os
 from tqdm import tqdm
-import cv2
+import cv2, sys
 import glob
 import numpy as np
 from utils import check_path, bbox_yolo2norm, parse_json, dset_format, name_mapping, dset_check_parse, draw_bbox
-
+import argparse
 
 # 取得 map_table.json 的資訊
 content_temp=[]                                         # 用於更換標籤內容的變數
 dataset, mode, in_type, out_type, sample_grid, sample_grid_path, map_class = parse_json('./map_table.json')    # 解析 json 檔案 
+
+# 取得副檔名 如果有給的話
+ftype = sys.argv[1] if len(sys.argv)>=2 else 'jpg'
 
 # 檢查輸入的位置是否正確、是否存在
 check_path(dataset)
@@ -21,8 +24,13 @@ check_path(dataset)
 # 取得所有標籤檔
 txt_files=glob.glob(f'{dataset}/*.txt')
 
-# 取得所有圖檔，使用第一張取得圖片大小
-img_files=glob.glob(f'{dataset}/*.jpg')
+# 取得所有圖檔,使用第一張取得圖片大小
+img_files=glob.glob(f'{dataset}/*.{ftype}')
+
+if len(img_files)==0:
+    print('No such file in directory.')
+    exit(1)
+
 img_sample=cv2.imread(img_files[0])             # 讀取樣本
         # 取得高寬通道
 frames, row_frames=[],[]                        # 為了顯示用的

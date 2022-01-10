@@ -1,3 +1,4 @@
+mix_all/
 __pycache__/utils.cpython-38.pyc
 mask/0.jpg
 mask/0.txt
@@ -74,3 +75,4 @@ mask/35.txt
 mask/36.jpg
 mask/36.txt
 mask/classes.txt
+__pycache__/utils.cpython-36.pyc

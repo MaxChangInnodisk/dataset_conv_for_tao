@@ -1,5 +1,5 @@
 {
-    "dataset":"data",
+    "dataset":"mix_all",
     "mode_option":["convert", "only-show"],
     "mode":"convert",
     "in_type":"yolo",
@@ -7,7 +7,7 @@
     "sample_grid_path":"./sample_org.jpg",
     "sample_grid":"3x5",
     "map_class":{
-        "0":"usb",
-        "1":"usb"
+        "0":"OK",
+        "1":"NG"
     }
 }
