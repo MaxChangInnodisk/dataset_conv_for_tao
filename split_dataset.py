@@ -1,6 +1,6 @@
 import logging
 import shutil
-import os
+import os, sys
 from random import shuffle
 import glob
 from tqdm import tqdm
@@ -39,7 +39,15 @@ logging.info('Split custom data is starting')
 ##################################################################
 
 # Get All Images in label_dir
-img_list = glob.glob( os.path.join(dataset, '*.jpg' ))
+# 取得副檔名 如果有給的話
+ftype = sys.argv[1] if len(sys.argv)>=2 else 'jpg'
+
+img_list = glob.glob( os.path.join(dataset, f'*.{ftype}' ))
+
+if len(img_list)==0:
+    print('No such file in directory.')
+    exit(1)
+
 shuffle(img_list)    # Shuffle data
 
 # Split train/val/test with 8/1/1
@@ -49,21 +57,21 @@ range_2 = int(range_total*0.9)
 
 for idx in range(range_1):
     name, ext = os.path.splitext(img_list[idx])
-    img_path=name+'.jpg'
+    img_path=name+f'.{ftype}'
     lbl_path=name+'.txt'
     shutil.copy2(img_path, train_img_dir)
     shutil.copy2(lbl_path, train_lbl_dir)
 
 for idx in range(range_1, range_2):
     name, ext = os.path.splitext(img_list[idx])
-    img_path=name+'.jpg'
+    img_path=name+f'.{ftype}'
     lbl_path=name+'.txt'
     shutil.copy2(img_path, test_img_dir)
     shutil.copy2(lbl_path, test_lbl_dir)
 
 for idx in range(range_2, range_total):
     name, ext = os.path.splitext(img_list[idx])
-    img_path=name+'.jpg'
+    img_path=name+f'.{ftype}'
     lbl_path=name+'.txt'
     shutil.copy2(img_path, val_img_dir)
     shutil.copy2(lbl_path, val_lbl_dir)         
