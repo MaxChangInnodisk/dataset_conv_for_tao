@@ -1,6 +1,7 @@
 mix_all/
 split/
-__pycache__/utils.cpython-38.pyc
+**/*/__pycache__/
+__pycache__/
 mask/0.jpg
 mask/0.txt
 mask/1.jpg
